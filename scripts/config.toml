@@ -1,0 +1,4 @@
+[filenames]
+lineItems = "line-items.csv"
+orders = "orders.csv"
+output = "[[YYYYMMDD]]-sales-data-[[ts]].csv"
