@@ -1,4 +1,3 @@
-import re
 from typing import Optional
 
 def buildDataFilename(filename: str, datestamp: str, timestamp: Optional[str] = None):
