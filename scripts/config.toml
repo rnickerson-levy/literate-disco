@@ -1,4 +1,4 @@
 [filenames]
-lineItems = "line-items.csv"
-orders = "orders.csv"
-output = "[[YYYYMMDD]]-sales-data-[[ts]].csv"
+lineItems = "line_items_[[YYYYMMDD]].csv"
+orders = "orders_[[YYYYMMDD]].csv"
+salesData = "[[YYYYMMDD]]_sales_data_[[ts]].csv"

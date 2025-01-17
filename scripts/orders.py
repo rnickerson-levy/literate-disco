@@ -18,7 +18,7 @@ class Orders:
     self.filePath = filePath
     self.rawData = None
     self.filteredData = None
-    self.bucketedData = None
+    self.bucketedData: dict[str, float] = {}
     self.report = report
 
   def getRawData(self):
@@ -57,8 +57,6 @@ class Orders:
   def bucket(self, validUuids):
     if self.rawData is None:
       raise TypeError("Order data must be loaded before bucketing")
-    
-    self.bucketedData: dict[str, float] = {}
 
     if self.report:
       self.report.p("Bucketing tips...")

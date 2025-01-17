@@ -95,7 +95,7 @@ class LineItems:
   
   def filter(self):
     if self.rawData is None:
-      raise TypeError("Line Item data must be loaded before it can be filtered")
+      raise TypeError("Line Items data must be loaded before it can be filtered")
     
     recordsCount = len(self.rawData)
     if self.report:

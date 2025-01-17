@@ -1,5 +1,87 @@
-from datetime import datetime
-from yyyymmdd import getYYYYMMDD
+import os
+from config import Config
+from build_path import buildPath
+from logger import Logger
+from typing import Optional
+from get_epoch_ms import getEpochMS
+import time
+
+lgr = Logger()
+
+ts = time.time()
+lgr.p(ts)
+lgr.p(getEpochMS(ts))
+
+scriptPath = os.path.dirname(os.path.realpath(__file__))
+cfgPath = buildPath(os.path.dirname(os.path.realpath(__file__)), "config.toml")
+
+def reportWarnings(warnings: list[str], logger: Optional[Logger] = None):
+  if len(warnings) > 0:
+    for warning in warnings:
+      if logger is not None:
+        logger.p(f"WARNING: {warning}")
+      else:
+        print(f"WARNING: {warning}")
+
+cfg = Config()
+
+lgr.p(f"timestamp: {int(time.time())}")
+
+try:
+  reportWarnings(cfg.load(cfgPath))
+  # if len(warnings) > 0:
+  #   lgr.p("WARNINGS:")
+  #   for warning in warnings:
+  #     lgr.p(f"  -{warning}")
+# except FileNotFoundError as err:
+#   lgr.p(f"ERROR: [FileNotFoundError] {str(err)}")
+# except KeyError as err:
+#   lgr.p(f"ERROR: {str(err)}")
+# except ValueError as err:
+#   lgr.p(f"ERROR: {str(err)}")
+except Exception as err:
+  lgr.p(f"ERROR: {str(err)}")
+
+
+cfg.report()
+
+# import tomllib
+# from build_path import buildPath
+# from load_toml import loadToml
+  
+# config = loadToml(buildPath(os.path.dirname(os.path.realpath(__file__)), "config.toml"))
+
+# print(config["filenames"]["lineItems"])
+# print(config["filenames"]["orders"])
+# print(config["filenames"]["salesData"])
+# print(config["filenamess"]["salesData"])
+
+
+
+
+# import argparse
+# from cl_args import CLArgs
+
+# parser = argparse.ArgumentParser()
+# parser.add_argument('--foo', type=str)
+# parser.add_argument('--bar', type=int)
+
+# cla = CLArgs()
+
+# print(cla.getArgs("foo"))
+# i = cla.getArgs("bar")
+# print(i + 2)
+# print(cla.getArgs())
+# cla.report()
+
+
+
+
+
+
+
+# from datetime import datetime
+# from yyyymmdd import getYYYYMMDD
 
 # def getYYYYMMDD(dateString):
 #   for fmt in ("%m/%d/%Y", "%m-%d-%Y", "%m.%d.%Y"):
@@ -10,7 +92,7 @@ from yyyymmdd import getYYYYMMDD
 #       pass
 #   raise ValueError('no valid date format found')
 
-print(getYYYYMMDD("1/10/2024"))
+# print(getYYYYMMDD("1/10/2024"))
 
 
 # import os
